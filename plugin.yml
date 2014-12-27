@@ -1,0 +1,58 @@
+name: MSpawns
+main: MSpawns\Main
+version: "1.4"
+api: [1.9.0]
+load: STARTUP
+author: EvolSoft
+description: Multiple Spawns Plugin
+website: https://www.evolsoft.tk
+
+commands:
+ mspawns:
+  aliases: [ms]
+  description: MSpawns Commands.
+  permission: mspawns
+ setalias:
+  description: Set alias.
+  permission: mspawns.setalias
+ sethub:
+  aliases: [setlobby]
+  description: Set hub.
+  permission: mspawns.sethub
+ hub:
+  aliases: [lobby]
+  description: Teleport player to hub.
+  permission: mspawns.hub
+ setspawn:
+  description: Set world spawn.
+  permission: mspawns.setspawn
+ spawn:
+  description: Teleport player to world spawn.
+  permission: mspawns.spawn
+  
+permissions:
+ mspawns:
+  default: op
+  description: MSpawns commands permissions.
+  children:
+   mspawns.info:
+    default: op
+    description: Allows player to read info about MSpawns.
+   mspawns.reload:
+    default: op
+    description: Allows player to reload MSpawns.
+   mspawns.sethub:
+    default: op
+    description: Allows player to set hub.
+   mspawns.hub:
+    default: true
+    description: Teleport player to hub.
+   mspawns.setalias:
+    default: op
+    description: Allows player to set alias.
+   mspawns.setspawn:
+    default: op
+    description: Allows player to set spawn.
+   mspawns.spawn:
+    default: true
+    description: Teleport player to world spawn.
