@@ -12,7 +12,6 @@ PocketMine-MP Alpha_1.4 API 1.9.0
 
 ## Overview
 
-
 **MSpawns** is a Multiple Spawn plugin.
 
 **EvolSoft Website:** http://www.evolsoft.tk
