@@ -41,7 +41,7 @@ You can also customize spawn settings, spawn messages... and you can also set al
 
 **Configuration (config.yml):**
 
-```
+```yaml
 ---
 #Available Tags for messages:
 # - {PLAYER}: Show current player name
