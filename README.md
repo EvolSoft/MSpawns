@@ -2,15 +2,15 @@
 
 Multiple Spawn plugin for PocketMine-MP
 
-### Category
+## Category
 
 PocketMine-MP plugins
 
-### Requirements
+## Requirements
 
 PocketMine-MP Alpha_1.4 API 1.9.0
 
-### Overview
+## Overview
 
 
 **MSpawns** is a Multiple Spawn plugin.
@@ -24,7 +24,7 @@ PocketMine-MP Alpha_1.4 API 1.9.0
 You can set a global spawn (hub) and a spawn for each world.<br>
 You can also customize spawn settings, spawn messages... and you can also set aliases! (read documentation)
 
-***Commands:***
+**Commands:**
 
 ***/mspawns*** *- MSpawns commands*<br>
 ***/setalias*** *- Set alias*<br>
@@ -33,6 +33,69 @@ You can also customize spawn settings, spawn messages... and you can also set al
 ***/spawn*** *- Teleport to world spawn*<br>
 ***/setspawn*** *- Set world spawn*<br>
 
-***To-Do:***
+**To-Do:**
 
 *- Bug fix (if bugs will be found)*
+
+## Documentation
+
+**Configuration (config.yml):**
+
+```
+---
+#Available Tags for messages:
+# - {PLAYER}: Show current player name
+# - {WORLD}: Show current world name
+#Show [MSpawns] prefix
+show-prefix: true
+#Show hub-message or spawn-message when a player joins
+show-messages-onjoin: true
+#Force teleportation to hub when a player joins
+force-hub: false
+#Show message when a player teleports to hub
+enable-hub-message: true
+#Hub message
+hub-message: "Welcome to Hub, {PLAYER}"
+#Force teleportation to spawn when a player joins (obviously if you enable force-hub, force-spawn won't work)
+force-spawn: false
+#Show message when a player teleports to spawn
+enable-spawn-message: true
+#Spawn message
+spawn-message: "Teleported To {WORLD} Spawn"
+#Enable aliases usage
+enable-aliases: true
+...
+```
+
+**Aliases:**
+
+With aliases you can create commands that teleport players.<br>
+You can manually edit them in aliases.yml file.<br>
+If you want to create an alias you must specify the name and the target world (remember that the target world must have a spawn set)<br>
+*Example usage:*
+Imagine that you have a world called "pvpworld" and you want to set an alias called "pvp".
+1. Set spawn in world "pvpworld" with /setspawn
+2. Do /setalias pvp pvpworld
+To use the alias you must simply do /pvp and you will be teleported to "pvpworld" spawn
+
+*Remember that you can use aliases only if you set to true the value of "enable-aliases" in config.yml*
+
+**Commands:**
+
+***/mspawns*** *- MSpawns commands (aliases: [ms])*<br>
+***/setalias <name> <target>*** *- Set alias*<br>
+***/hub*** *- Teleport to global spawn*<br>
+***/sethub*** *- Set global spawn*<br>
+***/spawn*** *- Teleport to world spawn*<br>
+***/setspawn*** *- Set world spawn*<br>
+
+**Permissions:**
+
+- <dd><i><b>mspawns.*</b> - MSpawns commands permissions.</i></dd>
+- <dd><i><b>mspawns.info</b> - Allows player to read info about MSpawns.</i></dd>
+- <dd><i><b>mspawns.reload</b> - Allows player to reload MSpawns.</i></dd>
+- <dd><i><b>mspawns.sethub</b> - Allows player to set hub.</i></dd>
+- <dd><i><b>mspawns.hub</b> - Teleport player to hub.</i></dd>
+- <dd><i><b>mspawns.setalias</b> - Allows player to set alias.</i></dd>
+- <dd><i><b>mspawns.setspawn</b> - Allows player to set spawn.</i></dd>
+- <dd><i><b>mspawns.spawn</b> - Teleport player to world spawn.</i></dd>
