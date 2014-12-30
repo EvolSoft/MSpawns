@@ -1,4 +1,4 @@
-# MSpawns
+# MSpawns v1.4
 
 Multiple Spawn plugin for PocketMine-MP
 
