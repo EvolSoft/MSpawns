@@ -73,10 +73,10 @@ With aliases you can create commands that teleport players.<br>
 You can manually edit them in aliases.yml file.<br>
 If you want to create an alias you must specify the name and the target world (remember that the target world must have a spawn set)<br>
 *Example usage:*
-Imagine that you have a world called "pvpworld" and you want to set an alias called "pvp".
-1. Set spawn in world "pvpworld" with /setspawn
-2. Do /setalias pvp pvpworld
-To use the alias you must simply do /pvp and you will be teleported to "pvpworld" spawn
+Imagine that you have a world called "pvpworld" and you want to set an alias called "pvp".<br>
+1. Set spawn in world "pvpworld" with /setspawn<br>
+2. Do /setalias pvp pvpworld<br>
+To use the alias you must simply do /pvp and you will be teleported to "pvpworld" spawn<br>
 
 *Remember that you can use aliases only if you set to true the value of "enable-aliases" in config.yml*
 
