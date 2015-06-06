@@ -1,7 +1,7 @@
 name: MSpawns
 main: MSpawns\Main
-version: "1.4"
-api: [1.9.0]
+version: "1.5"
+api: [1.11.0]
 load: STARTUP
 author: EvolSoft
 description: Multiple Spawns Plugin
