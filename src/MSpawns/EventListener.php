@@ -5,7 +5,7 @@
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
  * Date: 06/06/2015 01:27 PM (UTC)
- * Copyright & License: (C) 2014-2015 EvolSoft
+ * Copyright & License: (C) 2014-2017 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/MSpawns/blob/master/LICENSE)
  */
 

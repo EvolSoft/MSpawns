@@ -10,7 +10,7 @@ PocketMine-MP plugins
 
 ## Requirements
 
-PocketMine-MP Alpha_1.4 API 1.11.0
+[PocketMine-MP](https://github.com/pmmp/PocketMine-MP) API 2.0.0 - 3.0.0-ALPHA4
 
 ## Overview
 
@@ -44,27 +44,30 @@ You can also customize spawn settings, spawn messages... and you can also set al
 
 ```yaml
 ---
-#Available Tags for messages:
-# - {PLAYER}: Show current player name
-# - {WORLD}: Show current world name
-#Show [MSpawns] prefix
+# Available Tags for messages:
+#  - {PLAYER}: Show current player name
+#  - {WORLD}: Show current world name
+# Show [MSpawns] prefix
 show-prefix: true
-#Show hub-message or spawn-message when a player joins
+# Show hub-message or spawn-message when a player joins
 show-messages-onjoin: true
-#Force teleportation to hub when a player joins
+# Force teleportation to hub when a player joins
 force-hub: false
-#Show message when a player teleports to hub
+# Show message when a player teleports to hub
 enable-hub-message: true
-#Hub message
+# Hub message
 hub-message: "Welcome to Hub, {PLAYER}"
-#Force teleportation to spawn when a player joins (obviously if you enable force-hub, force-spawn won't work)
+# Force teleportation to spawn when a player joins (obviously if you enable force-hub, force-spawn won't work)
 force-spawn: false
-#Show message when a player teleports to spawn
+# Show message when a player teleports to spawn
 enable-spawn-message: true
-#Spawn message
+# Spawn message
 spawn-message: "Teleported To {WORLD} Spawn"
-#Enable aliases usage
+# Enable aliases usage
 enable-aliases: true
+# Teleport a player to the spawn/hub when they die
+# 1 = Teleport to spawn 2 = Teleport to Hub
+teleport-on-death: 1
 ...
 ```
 

@@ -1,11 +1,11 @@
 <?php
 
 /*
- * MSpawns (v1.4) by EvolSoft
+ * MSpawns (v1.5) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
  * Date: 27/12/2014 01:25 PM (UTC)
- * Copyright & License: (C) 2014 EvolSoft
+ * Copyright & License: (C) 2014-2017 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/MSpawns/blob/master/LICENSE)
  */
 

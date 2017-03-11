@@ -5,7 +5,7 @@
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
  * Date: 06/06/2015 01:26 PM (UTC)
- * Copyright & License: (C) 2014-2015 EvolSoft
+ * Copyright & License: (C) 2014-2017 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/MSpawns/blob/master/LICENSE)
  */
 
@@ -39,7 +39,6 @@ class Main extends PluginBase{
 	 
 
 	public function translateColors($symbol, $message){
-		
 		$message = str_replace($symbol."0", TextFormat::BLACK, $message);
 		$message = str_replace($symbol."1", TextFormat::DARK_BLUE, $message);
 		$message = str_replace($symbol."2", TextFormat::DARK_GREEN, $message);
@@ -75,16 +74,20 @@ class Main extends PluginBase{
         $this->saveResource("spawns.yml");
         $this->aliases = new Config($this->getDataFolder() . "aliases.yml", Config::YAML, array());
         $this->spawns = new Config($this->getDataFolder() . "spawns.yml", Config::YAML, array());
+        $this->registerCommands();
+        if($this->cfg["enable-aliases"] === true){
+        	$this->reloadAliases();
+        }
+	    $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
+    }
+    
+    private function registerCommands(){
         $this->getCommand("sethub")->setExecutor(new Commands\SetHub($this));
         $this->getCommand("hub")->setExecutor(new Commands\Hub($this));
         $this->getCommand("setspawn")->setExecutor(new Commands\SetSpawn($this));
         $this->getCommand("spawn")->setExecutor(new Commands\Spawn($this));
         $this->getCommand("setalias")->setExecutor(new Commands\SetAlias($this));
         $this->getCommand("mspawns")->setExecutor(new Commands\Commands($this));
-        if($this->cfg["enable-aliases"] === true){
-        	$this->reloadAliases();
-        }
-	    $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
     }
     
     public function reloadAliases(){
@@ -96,14 +99,13 @@ class Main extends PluginBase{
     }
     
     public function getSpawnMessage(Player $player){
-    	$temp = $this->getConfig()->getAll();
-    	if($temp["show-prefix"] === true){
-    		$format = Main::PREFIX . $temp["spawn-message"];
+    	if($this->cfg["show-prefix"] === true){
+    		$format = Main::PREFIX . $this->cfg["spawn-message"];
     		$format = str_replace("{PLAYER}", $player->getName(), $format);
     		$format = str_replace("{WORLD}", $player->getLevel()->getName(), $format);
     		return $format;
     	}else{
-    		$format = $temp["spawn-message"];
+    		$format = $this->cfg["spawn-message"];
     		$format = str_replace("{PLAYER}", $player->getName(), $format);
     		$format = str_replace("{WORLD}", $player->getLevel()->getName(), $format);
     		return $format;
@@ -111,14 +113,13 @@ class Main extends PluginBase{
     }
     
     public function getSpawnMessage_2(Player $player, Level $level){
-    	$temp = $this->getConfig()->getAll();
-    	if($temp["show-prefix"] === true){
-    		$format = Main::PREFIX . $temp["spawn-message"];
+    	if($this->cfg["show-prefix"] === true){
+    		$format = Main::PREFIX . $this->cfg["spawn-message"];
     		$format = str_replace("{PLAYER}", $player->getName(), $format);
     		$format = str_replace("{WORLD}", $level->getName(), $format);
     		return $format;
     	}else{
-    		$format = $temp["spawn-message"];
+    		$format = $this->cfg["spawn-message"];
     		$format = str_replace("{PLAYER}", $player->getName(), $format);
     		$format = str_replace("{WORLD}", $level->getName(), $format);
     		return $format;
@@ -126,8 +127,7 @@ class Main extends PluginBase{
     }
     
     public function getNoSpawnMessage(){
-    	$temp = $this->getConfig()->getAll();
-    	if($temp["show-prefix"] === true){
+    	if($this->cfg["show-prefix"] === true){
     		$format = Main::PREFIX . "&cNo spawn found in this world";
     		return $format;
     	}else{
@@ -137,14 +137,13 @@ class Main extends PluginBase{
     }
     
     public function getHubMessage(Player $player){
-    	$temp = $this->getConfig()->getAll();
-    	if($temp["show-prefix"] === true){
-    		$format = Main::PREFIX . $temp["hub-message"];
+    	if($this->cfg["show-prefix"] === true){
+    		$format = Main::PREFIX . $this->cfg["hub-message"];
     		$format = str_replace("{PLAYER}", $player->getName(), $format);
     		$format = str_replace("{WORLD}", $player->getLevel()->getName(), $format);
     		return $format;
     	}else{
-    		$format = $temp["hub-message"];
+    		$format = $this->cfg["hub-message"];
     		$format = str_replace("{PLAYER}", $player->getName(), $format);
     		$format = str_replace("{WORLD}", $player->getLevel()->getName(), $format);
     		return $format;
@@ -152,8 +151,7 @@ class Main extends PluginBase{
     }
     
     public function getNoHubMessage(){
-    	$temp = $this->getConfig()->getAll();
-    	if($temp["show-prefix"] === true){
+    	if($this->cfg["show-prefix"] === true){
     		$format = Main::PREFIX . "&cNo hub set";
     		return $format;
     	}else{
@@ -163,8 +161,7 @@ class Main extends PluginBase{
     }
     
     public function getNoWorldMessage(){
-    	$temp = $this->getConfig()->getAll();
-    	if($temp["show-prefix"] === true){
+    	if($this->cfg["show-prefix"] === true){
     		$format = Main::PREFIX . "&cWorld not found";
     		return $format;
     	}else{
@@ -175,18 +172,15 @@ class Main extends PluginBase{
     
 
     public function getForceSpawn_OnJoin(){
-    	$temp = $this->getConfig()->getAll();
-    	return $temp["force-spawn"];
+    	return $this->cfg["force-spawn"];
     }
     
     /*public function getForceSpawn(){
-    	$temp = $this->getConfig()->getAll();
-    	return $temp["force-spawn"];
+    	return $this->cfg["force-spawn"];
     }*/
     
     public function getForceHub_OnJoin(){
-    	$temp = $this->getConfig()->getAll();
-    	return $temp["force-hub"];
+    	return $this->cfg["force-hub"];
     }
     
     public function SetAlias($name, $target){
@@ -262,17 +256,15 @@ class Main extends PluginBase{
     }
     
     public function HubExists(){
-    	$temp = $this->getConfig()->getAll();
-    	return isset($temp["hub"]);
+    	return isset($this->cfg["hub"]);
     }
     
     public function teleportToSpawn(Player $player){
-    	$temp = $this->getConfig()->getAll();
     	$spawns = new Config($this->getDataFolder() . "spawns.yml", Config::YAML, array());
     	$spawns = $spawns->getAll();
     	if(isset($spawns[$player->getLevel()->getName()])){
     		$player->teleport(new Position($spawns[$player->getLevel()->getName()]["X"], $spawns[$player->getLevel()->getName()]["Y"], $spawns[$player->getLevel()->getName()]["Z"]), $spawns[$player->getLevel()->getName()]["Yaw"], $spawns[$player->getLevel()->getName()]["Pitch"]);
-    		if($temp["enable-spawn-message"] === true){
+    		if($this->cfg["enable-spawn-message"] === true){
     			$player->sendMessage($this->translateColors("&", $this->getSpawnMessage($player)));
     		}
     	}else{
@@ -282,12 +274,11 @@ class Main extends PluginBase{
     }
     
     public function teleportToSpawn_2(Player $player, Level $level){
-    	$temp = $this->getConfig()->getAll();
     	$spawns = new Config($this->getDataFolder() . "spawns.yml", Config::YAML, array());
     	$spawns = $spawns->getAll();
     	if(isset($spawns[$level->getName()])){
     		$player->teleport(new Position($spawns[$level->getName()]["X"], $spawns[$level->getName()]["Y"], $spawns[$level->getName()]["Z"]), $spawns[$level->getName()]["Yaw"], $spawns[$level->getName()]["Pitch"]);
-    		if($temp["enable-spawn-message"] === true){
+    		if($this->cfg["enable-spawn-message"] === true){
     			$player->sendMessage($this->translateColors("&", $this->getSpawnMessage_2($player, $level)));
     		}
     	}else{
@@ -297,12 +288,11 @@ class Main extends PluginBase{
     }
     
     public function teleportToSpawn_OnJoin(Player $player){
-    	$temp = $this->getConfig()->getAll();
     	$spawns = new Config($this->getDataFolder() . "spawns.yml", Config::YAML, array());
     	$spawns = $spawns->getAll();
     	if(isset($spawns[$player->getLevel()->getName()])){
     		$player->teleport(new Position($spawns[$player->getLevel()->getName()]["X"], $spawns[$player->getLevel()->getName()]["Y"], $spawns[$player->getLevel()->getName()]["Z"]), $spawns[$player->getLevel()->getName()]["Yaw"], $spawns[$player->getLevel()->getName()]["Pitch"]);
-    		if($temp["enable-spawn-message"] === true && $temp["show-messages-onjoin"] === true){
+    		if($this->cfg["enable-spawn-message"] === true && $this->cfg["show-messages-onjoin"] === true){
     			$player->sendMessage($this->translateColors("&", $this->getSpawnMessage($player)));
     		}
     	}

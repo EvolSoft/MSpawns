@@ -1,11 +1,26 @@
 ---
+# Available Tags for messages:
+#  - {PLAYER}: Show current player name
+#  - {WORLD}: Show current world name
+# Show [MSpawns] prefix
 show-prefix: true
+# Show hub-message or spawn-message when a player joins
 show-messages-onjoin: true
+# Force teleportation to hub when a player joins
 force-hub: false
+# Show message when a player teleports to hub
 enable-hub-message: true
-hub-message: Welcome to Hub, {PLAYER}
+# Hub message
+hub-message: "Welcome to Hub, {PLAYER}"
+# Force teleportation to spawn when a player joins (obviously if you enable force-hub, force-spawn won't work)
 force-spawn: false
+# Show message when a player teleports to spawn
 enable-spawn-message: true
-spawn-message: Teleported To {WORLD} Spawn
+# Spawn message
+spawn-message: "Teleported To {WORLD} Spawn"
+# Enable aliases usage
 enable-aliases: true
+# Teleport a player to the spawn/hub when they die
+# 1 = Teleport to spawn 2 = Teleport to Hub
+teleport-on-death: 1
 ...
