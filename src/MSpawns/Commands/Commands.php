@@ -29,12 +29,11 @@ class Commands extends PluginBase implements CommandExecutor{
     }
     
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	$fcmd = strtolower($cmd->getName());
-    	switch($fcmd){
+    	switch(strtolower($cmd->getName())){
     			   case "mspawns":
     			   	if(isset($args[0])) {
     			   		$args[0] = strtolower($args[0]);
-    			   		if($args[0]=="reload"){
+    			   		if($args[0] === "reload"){
     			   			if ($sender->hasPermission("mspawns.reload")) {
     			   				$this->plugin->reloadConfig();
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&aConfiguration Reloaded."));
@@ -45,7 +44,7 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				return true;
     			   			}
     			   		}
-    			   		elseif($args[0]=="info"){
+    			   		elseif($args[0] === "info"){
     			   			if ($sender->hasPermission("mspawns.info")) {
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&6MSpawns &cv" . Main::VERSION . " &6developed by&c " . Main::PRODUCER));
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&6Website &c" . Main::MAIN_WEBSITE));
@@ -55,7 +54,7 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				$sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));
     			   				return true;
     			   			}
-    			   		}elseif($args[0]=="setalias"){
+    			   		}elseif($args[0] === "setalias"){
     			   			if($sender->hasPermission("mspawns.setalias")){
     			   				if(isset($args[1]) && isset($args[1])){
     			   					if($this->plugin->setAlias($args[1], $args[2])){
@@ -71,7 +70,7 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				$sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));
     			   				return true;
     			   			}
-    			   		}elseif($args[0]=="sethub"){
+    			   		}elseif($args[0] === "sethub"){
     			   			if($sender instanceof Player){
     			   				if($sender->hasPermission("mspawns.sethub")){
     			   					$this->plugin->setHub($sender);
@@ -85,7 +84,7 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&cYou can only perform this command as a player"));
     			   				return true;
     			   			}
-    			   		}elseif($args[0]=="hub"){
+    			   		}elseif($args[0] === "hub"){
     			   			if($sender instanceof Player){
     			   				if($sender->hasPermission("mspawns.hub")){
     			   					$this->plugin->teleportToHub($sender);
@@ -99,7 +98,7 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&cYou can only perform this command as a player"));
     			   				return true;
     			   			}	
-    			   		}elseif($args[0]=="setspawn"){
+    			   		}elseif($args[0] === "setspawn"){
     			   			if($sender instanceof Player){
     			   				if($sender->hasPermission("mspawns.setspawn")){
     			   					$this->plugin->setSpawn($sender);
@@ -113,7 +112,7 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&cYou can only perform this command as a player"));
     			   				return true;
     			   			}
-    			   		}elseif($args[0]=="spawn"){
+    			   		}elseif($args[0] === "spawn"){
     			   			if($sender instanceof Player){
     			   				if($sender->hasPermission("mspawns.spawn")){
     			   					$this->plugin->teleportToSpawn($sender);
@@ -162,4 +161,4 @@ class Commands extends PluginBase implements CommandExecutor{
     }
 	
 }
-    ?>
+   

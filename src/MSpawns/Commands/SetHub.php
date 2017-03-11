@@ -33,8 +33,7 @@ class SetHub extends PluginBase implements CommandExecutor{
     }
     
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	$fcmd = strtolower($cmd->getName());
-    	switch($fcmd){
+    	switch(strtolower($cmd->getName())){
     			case "sethub":
     				if($sender instanceof Player){
     					if($sender->hasPermission("mspawns.sethub")){
@@ -54,4 +53,4 @@ class SetHub extends PluginBase implements CommandExecutor{
     }
 	
 }
-    ?>
+    

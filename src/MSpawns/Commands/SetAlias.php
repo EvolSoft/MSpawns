@@ -33,8 +33,7 @@ class SetAlias extends PluginBase implements CommandExecutor{
     }
     
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	$fcmd = strtolower($cmd->getName());
-    	switch($fcmd){
+    	switch(strtolower($cmd->getName())){
     			case "setalias":
     				if($sender->hasPermission("mspawns.setalias")){
     					if(isset($args[0]) && isset($args[1])){
@@ -57,4 +56,4 @@ class SetAlias extends PluginBase implements CommandExecutor{
     }
 	
 }
-    ?>
+    

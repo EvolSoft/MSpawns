@@ -33,8 +33,7 @@ class Spawn extends PluginBase implements CommandExecutor{
     }
     
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	$fcmd = strtolower($cmd->getName());
-    	switch($fcmd){
+    	switch(strtolower($cmd->getName())){
     			case "spawn":
     				if($sender instanceof Player){
     					if($sender->hasPermission("mspawns.spawn")){
@@ -55,4 +54,4 @@ class Spawn extends PluginBase implements CommandExecutor{
     }
 	
 }
-    ?>
+    

@@ -33,8 +33,7 @@ class SetSpawn extends PluginBase implements CommandExecutor{
     }
     
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	$fcmd = strtolower($cmd->getName());
-    	switch($fcmd){
+    	switch(strtolower($cmd->getName())){
     			case "setspawn":
     				if($sender instanceof Player){
     					if($sender->hasPermission("mspawns.setspawn")){
@@ -54,4 +53,5 @@ class SetSpawn extends PluginBase implements CommandExecutor{
     }
 	
 }
-    ?>
+   
+   

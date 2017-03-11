@@ -33,8 +33,7 @@ class Hub extends PluginBase implements CommandExecutor{
     }
     
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	$fcmd = strtolower($cmd->getName());
-    	switch($fcmd){
+    	switch(strtolower($cmd->getName())){
     			case "hub":
     				if($sender instanceof Player){
     					if($sender->hasPermission("mspawns.hub")){
@@ -55,4 +54,4 @@ class Hub extends PluginBase implements CommandExecutor{
     }
 	
 }
-    ?>
+    
