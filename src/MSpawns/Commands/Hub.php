@@ -32,7 +32,7 @@ class Hub extends PluginBase implements CommandExecutor{
         $this->plugin = $plugin;
     }
     
-    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) {
     	switch(strtolower($cmd->getName())){
     			case "hub":
     				if($sender instanceof Player){
