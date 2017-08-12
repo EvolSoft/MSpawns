@@ -1,4 +1,4 @@
-<?php
+:<?php
 
 /*
  * MSpawns (v1.5) by EvolSoft
@@ -32,8 +32,8 @@ class Hub extends PluginBase implements CommandExecutor{
         $this->plugin = $plugin;
     }
     
-    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) {
-    	switch(strtolower($cmd->getName())){
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
+    	switch(strtolower($command->getName())){
     			case "hub":
     				if($sender instanceof Player){
     					if($sender->hasPermission("mspawns.hub")){
