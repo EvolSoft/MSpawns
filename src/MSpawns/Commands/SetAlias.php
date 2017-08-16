@@ -1,4 +1,4 @@
-<?php
+ommand<?php
 
 /*
  * MSpawns (v1.5) by EvolSoft
@@ -32,8 +32,8 @@ class SetAlias extends PluginBase implements CommandExecutor{
         $this->plugin = $plugin;
     }
     
-    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	switch(strtolower($cmd->getName())){
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
+	    switch(strtolower($command->getName())){
     			case "setalias":
     				if($sender->hasPermission("mspawns.setalias")){
     					if(isset($args[0]) && isset($args[1])){

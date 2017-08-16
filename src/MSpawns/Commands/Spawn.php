@@ -32,8 +32,8 @@ class Spawn extends PluginBase implements CommandExecutor{
         $this->plugin = $plugin;
     }
     
-    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	switch(strtolower($cmd->getName())){
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
+    	switch(strtolower($command->getName())){
     			case "spawn":
     				if($sender instanceof Player){
     					if($sender->hasPermission("mspawns.spawn")){
