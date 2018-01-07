@@ -1,57 +1,56 @@
 <?php
 
 /*
- * MSpawns (v1.5) by EvolSoft
+ * MSpawns (v2.0) by EvolSoft
  * Developer: EvolSoft (Flavius12)
- * Website: http://www.evolsoft.tk
- * Date: 27/12/2014 01:26 PM (UTC)
- * Copyright & License: (C) 2014-2017 EvolSoft
+ * Website: https://www.evolsoft.tk
+ * Date: 07/01/2018 04:29 PM (UTC)
+ * Copyright & License: (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/MSpawns/blob/master/LICENSE)
  */
 
 namespace MSpawns\Commands;
 
 use pocketmine\Player;
-use pocketmine\Server;
 use pocketmine\command\Command;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
-use pocketmine\level\Level;
-use pocketmine\level\Position;
-use pocketmine\math\Vector3;
-use pocketmine\permission\Permission;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\Config;
-use pocketmine\utils\TextFormat;
 
-use MSpawns\Main;
+use MSpawns\MSpawns;
 
-class Hub extends PluginBase implements CommandExecutor{
+class Hub extends PluginBase implements CommandExecutor {
 	
-	public function __construct(Main $plugin){
+	public function __construct(MSpawns $plugin){
         $this->plugin = $plugin;
     }
     
-    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	switch(strtolower($cmd->getName())){
-    			case "hub":
-    				if($sender instanceof Player){
-    					if($sender->hasPermission("mspawns.hub")){
-    						$this->plugin->teleportToHub($sender);
-    						return true;
-    					}
-    					else{
-    						$sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));
-    						return true;
-    					}
-    				}else{
-    					$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&cYou can only perform this command as a player"));
-    					return true;
-    				}
-    				break;
-    		}
+    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) : bool {
+		if($sender instanceof Player){
+			if($sender->hasPermission("mspawns.hub")){
+			    switch($this->plugin->teleportToHub($sender)){
+			        case MSpawns::ERR_HUB_INVALID_WORLD:
+			            $sender->sendMessage($this->plugin->translateColors("&", $this->plugin->replaceVars($this->plugin->getMessage("invalid-world"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $sender->getName(), "WORLD" => $this->plugin->getHubName()))));
+			            break;
+			        case MSpawns::ERR_NO_HUB:
+			            $sender->sendMessage($this->plugin->translateColors("&", $this->plugin->replaceVars($this->plugin->getMessage("no-hub"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $sender->getName(), "WORLD" => $this->plugin->getHubName()))));
+			            break;
+			        case MSpawns::ERR_HUB_TRANSFER:
+			            $sender->sendMessage($this->plugin->translateColors("&", $this->plugin->replaceVars($this->plugin->getMessage("transfer-error"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $sender->getName(), "WORLD" => $this->plugin->getHubName()))));
+			            break;
+			        default:
+			        case MSpawns::SUCCESS:
+			            if($this->plugin->isHubMessageEnabled()){
+			                $sender->sendMessage($this->plugin->translateColors("&", $this->plugin->getFormattedHubMessage($sender)));
+			            }
+			            break;
+			    }
+			}else{
+				$sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));
+			}
+		}else{
+			$sender->sendMessage($this->plugin->translateColors("&", MSpawns::PREFIX . "&c You can only perform this command as a player"));
+		}
     	return true;
     }
-	
 }
-    

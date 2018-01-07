@@ -1,0 +1,14 @@
+---
+#Hub message
+hub-message: "{PREFIX} &bWelcome to Hub, &a{PLAYER}"
+#No hub message
+no-hub: "{PREFIX} &cNo hub set"
+#Spawn message
+spawn-message: "{PREFIX} &bTeleported to &e{WORLD}&b Spawn"
+#No spawn message
+no-spawn: "{PREFIX} &cNo spawn found in this world"
+#Invalid world
+invalid-world: "{PREFIX} &cWorld not found"
+#Spawn aliases disabled
+aliases-disabled: "{PREFIX} &cSpawn aliases are disabled on this server"
+...
