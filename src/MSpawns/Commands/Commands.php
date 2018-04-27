@@ -1,7 +1,7 @@
 <?php
 
 /*
- * MSpawns (v2.0) by EvolSoft
+ * MSpawns (v2.1) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: https://www.evolsoft.tk
  * Date: 07/01/2018 04:30 PM (UTC)
