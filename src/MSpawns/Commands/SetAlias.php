@@ -12,13 +12,13 @@
 namespace MSpawns\Commands;
 
 use pocketmine\command\Command;
+use pocketmine\command\PluginCommand;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
-use pocketmine\plugin\PluginBase;
 
 use MSpawns\MSpawns;
 
-class SetAlias extends PluginBase implements CommandExecutor {
+class SetAlias extends PluginCommand implements CommandExecutor {
 	
 	public function __construct(MSpawns $plugin){
         $this->plugin = $plugin;
