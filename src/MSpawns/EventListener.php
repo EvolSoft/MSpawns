@@ -17,8 +17,9 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\level\Position;
 use pocketmine\plugin\PluginBase;
+use pocketmine\command\PluginCommand;
 
-class EventListener extends PluginBase implements Listener {
+class EventListener extends PluginCommand implements Listener {
 	
 	public function __construct(MSpawns $plugin){
         $this->plugin = $plugin;
