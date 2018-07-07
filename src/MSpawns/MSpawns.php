@@ -1,11 +1,10 @@
 <?php
 
 /*
- * MSpawns (v2.1) by EvolSoft
- * Developer: EvolSoft (Flavius12)
+ * MSpawns v2.2 by EvolSoft
+ * Developer: Flavius12
  * Website: https://www.evolsoft.tk
- * Date: 07/01/2018 04:21 PM (UTC)
- * Copyright & License: (C) 2014-2018 EvolSoft
+ * Copyright (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/MSpawns/blob/master/LICENSE)
  */
 
@@ -17,12 +16,14 @@ use pocketmine\level\Level;
 use pocketmine\level\Position;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-use pocketmine\utils\TextFormat;
 
 class MSpawns extends PluginBase {
 
     /** @var string */
 	const PREFIX = "&7[&cMSpawns&7]";
+	
+	/** @var string */
+	const API_VERSION = "2.0";
 	
 	/** @var array */
     public $cfg;
@@ -48,39 +49,13 @@ class MSpawns extends PluginBase {
 	/** @var int */
 	const ERR_HUB_TRANSFER = 4;
 
-	/**
-	 * Translate Minecraft colors
-	 * 
-	 * @param string $symbol
-	 * @param string $message
-	 * 
-	 * @return string
-	 */
-	public function translateColors($symbol, $message){
-	    $message = str_replace($symbol . "0", TextFormat::BLACK, $message);
-	    $message = str_replace($symbol . "1", TextFormat::DARK_BLUE, $message);
-	    $message = str_replace($symbol . "2", TextFormat::DARK_GREEN, $message);
-	    $message = str_replace($symbol . "3", TextFormat::DARK_AQUA, $message);
-	    $message = str_replace($symbol . "4", TextFormat::DARK_RED, $message);
-	    $message = str_replace($symbol . "5", TextFormat::DARK_PURPLE, $message);
-	    $message = str_replace($symbol . "6", TextFormat::GOLD, $message);
-	    $message = str_replace($symbol . "7", TextFormat::GRAY, $message);
-	    $message = str_replace($symbol . "8", TextFormat::DARK_GRAY, $message);
-	    $message = str_replace($symbol . "9", TextFormat::BLUE, $message);
-	    $message = str_replace($symbol . "a", TextFormat::GREEN, $message);
-	    $message = str_replace($symbol . "b", TextFormat::AQUA, $message);
-	    $message = str_replace($symbol . "c", TextFormat::RED, $message);
-	    $message = str_replace($symbol . "d", TextFormat::LIGHT_PURPLE, $message);
-	    $message = str_replace($symbol . "e", TextFormat::YELLOW, $message);
-	    $message = str_replace($symbol . "f", TextFormat::WHITE, $message);
-	    
-	    $message = str_replace($symbol . "k", TextFormat::OBFUSCATED, $message);
-	    $message = str_replace($symbol . "l", TextFormat::BOLD, $message);
-	    $message = str_replace($symbol . "m", TextFormat::STRIKETHROUGH, $message);
-	    $message = str_replace($symbol . "n", TextFormat::UNDERLINE, $message);
-	    $message = str_replace($symbol . "o", TextFormat::ITALIC, $message);
-	    $message = str_replace($symbol . "r", TextFormat::RESET, $message);
-	    return $message;
+	/** @var MSpawns */
+	private static $instance = null;
+	
+	public function onLoad(){
+	    if(!self::$instance instanceof MSpawns){
+	        self::$instance = $this;
+	    }
 	}
 	
     public function onEnable(){
@@ -106,6 +81,46 @@ class MSpawns extends PluginBase {
         	$this->reloadAliases();
         }
 	    $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
+    }
+    
+    /**
+     * Get MSpawns API
+     *
+     * @return MSpawns
+     */
+    public static function getAPI(){
+        return self::$instance;
+    }
+    
+    /**
+     * Get MSpawns version
+     *
+     * @return string
+     */
+    public function getVersion(){
+        return $this->getVersion();
+    }
+    
+    /**
+     * Get MSpawns API version
+     *
+     * @return string
+     */
+    public function getAPIVersion(){
+        return self::API_VERSION;
+    }
+    
+    /**
+     * Reload MSpawns configuration
+     */
+    public function reload(){
+        $this->reloadConfig();
+        $this->cfg = $this->getConfig()->getAll();
+        $this->spawns->reload();
+        $this->aliases->reload();
+        if($this->cfg["enable-aliases"]){
+            $this->reloadAliases();
+        }
     }
     
     /**

@@ -1,11 +1,10 @@
 <?php
 
 /*
- * MSpawns (v2.1) by EvolSoft
- * Developer: EvolSoft (Flavius12)
+ * MSpawns v2.2 by EvolSoft
+ * Developer: Flavius12
  * Website: https://www.evolsoft.tk
- * Date: 07/01/2018 04:25 PM (UTC)
- * Copyright & License: (C) 2014-2018 EvolSoft
+ * Copyright (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/MSpawns/blob/master/LICENSE)
  */
 
@@ -16,10 +15,12 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\level\Position;
-use pocketmine\plugin\PluginBase;
-use pocketmine\command\PluginCommand;
+use pocketmine\utils\TextFormat;
 
-class EventListener extends PluginCommand implements Listener {
+class EventListener implements Listener {
+    
+    /** @var MSpawns */
+    private $plugin;
 	
 	public function __construct(MSpawns $plugin){
         $this->plugin = $plugin;
@@ -69,28 +70,28 @@ class EventListener extends PluginCommand implements Listener {
     	if($this->plugin->isForceHubEnabled()){
     	    switch($this->plugin->teleportToHub($player)){
     	        case MSpawns::ERR_HUB_INVALID_WORLD:
-    	            $player->sendMessage($this->plugin->translateColors("&", $this->plugin->replaceVars($this->plugin->getMessage("invalid-world"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $player->getName(), "WORLD" => $this->plugin->getHubName()))));
+    	            $player->sendMessage(TextFormat::colorize($this->plugin->replaceVars($this->plugin->getMessage("invalid-world"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $player->getName(), "WORLD" => $this->plugin->getHubName()))));
     	            break;
     	        case MSpawns::ERR_NO_HUB:
-    	            $player->sendMessage($this->plugin->translateColors("&", $this->plugin->replaceVars($this->plugin->getMessage("no-hub"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $player->getName(), "WORLD" => $this->plugin->getHubName()))));
+    	            $player->sendMessage(TextFormat::colorize($this->plugin->replaceVars($this->plugin->getMessage("no-hub"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $player->getName(), "WORLD" => $this->plugin->getHubName()))));
     	            break;
     	        case MSpawns::ERR_HUB_TRANSFER:
-    	            $player->sendMessage($this->plugin->translateColors("&", $this->plugin->replaceVars($this->plugin->getMessage("transfer-error"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $player->getName(), "WORLD" => $this->plugin->getHubName()))));
+    	            $player->sendMessage(TextFormat::colorize($this->plugin->replaceVars($this->plugin->getMessage("transfer-error"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $player->getName(), "WORLD" => $this->plugin->getHubName()))));
     	            break;
     	        default:
     	        case MSpawns::SUCCESS:
     	            if($this->plugin->cfg["show-messages-onjoin"] && $this->plugin->isHubMessageEnabled()){
-    	                $player->sendMessage($this->plugin->translateColors("&", $this->plugin->getFormattedHubMessage($player)));
+    	                $player->sendMessage(TextFormat::colorize($this->plugin->getFormattedHubMessage($player)));
     	            }
     	            break;
     	    }
     	}else if($this->plugin->isForceSpawnEnabled()){
     		if($this->plugin->teleportToSpawn($player)){
     		    if($this->plugin->cfg["show-messages-onjoin"] && $this->plugin->isSpawnMessageEnabled()){
-    		      $player->sendMessage($this->plugin->translateColors("&", $this->plugin->getFormattedSpawnMessage($player)));
+    		        $player->sendMessage(TextFormat::colorize($this->plugin->getFormattedSpawnMessage($player)));
     		    }
     		}else{
-    		    $player->sendMessage($this->plugin->translateColors("&", $this->plugin->replaceVars($this->plugin->getMessage("no-spawn"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $player->getName(), "WORLD" => $player->getLevel()))));
+    		    $player->sendMessage(TextFormat::colorize($this->plugin->replaceVars($this->plugin->getMessage("no-spawn"), array("PREFIX" => MSpawns::PREFIX, "PLAYER" => $player->getName(), "WORLD" => $player->getLevel()))));
     		}
     	}
     }

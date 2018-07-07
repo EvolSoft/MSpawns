@@ -1,6 +1,6 @@
 name: MSpawns
 main: MSpawns\MSpawns
-version: 2.1
+version: 2.2
 api: [3.0.0]
 load: STARTUP
 author: EvolSoft
