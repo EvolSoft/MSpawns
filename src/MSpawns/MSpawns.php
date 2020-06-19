@@ -189,14 +189,14 @@ class MSpawns extends PluginBase {
      * @return bool
      */
     public function teleportToSpawn(Player $player, Level $level = null) : bool {
-        if($level){
+        if($level instanceof Level){
             $lvl = $level;
         }else{
             $lvl = $player->getLevel();
         }
         if($this->spawnExists($lvl)){
             $spawn = $this->getSpawn($lvl);
-            $player->teleport(new Position($spawn["X"], $spawn["Y"], $spawn["Z"], ($level == null) ? null : $lvl), $spawn["Yaw"], $spawn["Pitch"]);
+            $player->teleport(new Position($spawn["X"], $spawn["Y"], $spawn["Z"], $lvl), $spawn["Yaw"], $spawn["Pitch"]);
             return true;
         }
         return false;
