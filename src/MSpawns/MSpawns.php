@@ -189,7 +189,7 @@ class MSpawns extends PluginBase {
      * @return bool
      */
     public function teleportToSpawn(Player $player, Level $level = null) : bool {
-        if($level){
+        if($level instanceof Level){
             $lvl = $level;
         }else{
             $lvl = $player->getLevel();
@@ -318,15 +318,11 @@ class MSpawns extends PluginBase {
         if($this->isHubExternal()){
             return $player->transfer($hub["host"], $hub["port"]) ? self::SUCCESS : self::ERR_HUB_TRANSFER;
         }
-        if(strcasecmp($player->getLevel()->getName(), $hub["world"]) != 0){
-            if(!Server::getInstance()->loadLevel($hub["world"])){
-                return self::ERR_HUB_INVALID_WORLD;
-            }
-            $level = $this->getServer()->getLevelByName($hub["world"]);        
-            $player->teleport(new Position($hub["X"], $hub["Y"], $hub["Z"], $level), $hub["Yaw"], $hub["Pitch"]);
-            return self::SUCCESS;
+        if(!Server::getInstance()->loadLevel($hub["world"])){
+            return self::ERR_HUB_INVALID_WORLD;
         }
-        $player->teleport(new Position($hub["X"], $hub["Y"], $hub["Z"],$player->getLevel()), $hub["Yaw"], $hub["Pitch"]);
+        $level = $this->getServer()->getLevelByName($hub["world"]);
+        $player->teleport(new Position($hub["X"], $hub["Y"], $hub["Z"], $level), $hub["Yaw"], $hub["Pitch"]);
         return self::SUCCESS;
     }
     
