@@ -51,7 +51,7 @@ class EventListener implements Listener {
     			//Check if spawn exists
     			if($this->plugin->spawnExists($player->getLevel())){
     				$pos = $this->plugin->getSpawn($player->getLevel());
-    				$event->setRespawnPosition(new Position($pos["X"], $pos["Y"], $pos["Z"]), $pos["Yaw"], $pos["Pitch"]);
+    				$event->setRespawnPosition(new Position($pos["X"], $pos["Y"], $pos["Z"],$player->getLevel()), $pos["Yaw"], $pos["Pitch"]);
     			}
     		}elseif($this->cfg["teleport-on-death"] == 2){
     			//Check if hub exists
