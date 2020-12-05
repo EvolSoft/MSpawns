@@ -4,7 +4,7 @@
 
 Multiple spawns plugin for PocketMine-MP
 
-[![Download!](https://user-images.githubusercontent.com/10297075/101245387-cfc71c80-370c-11eb-8b9d-a50c7bac2641.png)](http://gestyy.com/er3p0k)
+[![Download!](https://user-images.githubusercontent.com/10297075/101246002-cb046780-3710-11eb-950f-ba06934b8138.png)](http://gestyy.com/er3p0k)
 
 ## Category
 
