@@ -29,7 +29,7 @@ You can also customize spawn settings, spawn messages... and you can also set al
 
 ## Donate
 
-Please support the development of this plugin with a small donation by clicking [:dollar: here](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=flavius.c.1999@gmail.com&lc=US&item_name=www.evolsoft.tk&no_note=0&cn=&curency_code=EUR&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted). 
+Please support the development of this plugin with a small donation by clicking [:dollar: here](http://paypal.me/Flavius12). 
 Your small donation will help me paying web hosting, domains, buying programs (such as IDEs, debuggers, etc...) and new hardware to improve software development. Thank you :smile:
 
 ## Documentation
