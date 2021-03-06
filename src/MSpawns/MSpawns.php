@@ -321,9 +321,16 @@ class MSpawns extends PluginBase {
         if(!Server::getInstance()->loadLevel($hub["world"])){
             return self::ERR_HUB_INVALID_WORLD;
         }
-        $level = $this->getServer()->getLevelByName($hub["world"]);
-        $player->teleport(new Position($hub["X"], $hub["Y"], $hub["Z"], $level), $hub["Yaw"], $hub["Pitch"]);
-        return self::SUCCESS;
+        if (Server::getInstance()->isLevelLoaded($hub["world"])) {
+            $level = $this->getServer()->getLevelByName($hub["world"]);
+            $player->teleport(new Position($hub["X"], $hub["Y"], $hub["Z"], $level), $hub["Yaw"], $hub["Pitch"]);
+            return self::SUCCESS;
+        } else {
+            Server::getInstance()->loadLevel($hub["world"]);
+            $level = $this->getServer()->getLevelByName($hub["world"]);
+            $player->teleport(new Position($hub["X"], $hub["Y"], $hub["Z"], $level), $hub["Yaw"], $hub["Pitch"]);
+            return self::SUCCESS;
+        }
     }
     
     /**
